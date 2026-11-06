@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day 10 - CSS Flexbox Section Layouts</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background-color: #f8fafc;
+    }
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      background: #ffffff;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+    }
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      padding: 4rem 0;
+      min-height: 55vh;
+    }
+    .hero-text {
+      flex: 1 1 450px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #475569;
+      margin-bottom: 1.75rem;
+    }
+    .hero-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 0.85rem 1.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .hero-visual {
+      flex: 1 1 350px;
+      min-height: 220px;
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #38bdf8;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.75rem;
+      box-shadow: 0 15px 25px -5px rgba(0,0,0,0.2);
+    }
+    /* Features */
+    .section-title {
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      color: #0f172a;
+    }
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .card {
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #0f172a;
+    }
+    .card p {
+      color: #475569;
+      flex-grow: 1;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      align-self: flex-start;
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: #eff6ff;
+      color: #2563eb;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+    /* Alternating */
+    .alt-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .alt-row.reverse {
+      flex-direction: row-reverse;
+    }
+    .alt-text {
+      flex: 1 1 50%;
+    }
+    .alt-box {
+      flex: 1 1 50%;
+      min-height: 180px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .alt-box.green {
+      background: linear-gradient(135deg, #10b981, #047857);
+    }
+    /* Footer */
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-top: 4rem;
+      margin-top: 4rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .alt-row, .alt-row.reverse {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="brand">FlexLayouts</div>
+      <nav class="nav-links">
+        <a href="#hero">Hero</a>
+        <a href="#features">Features</a>
+        <a href="#showcase">Showcase</a>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-text">
+        <span class="badge">Day 10: Section Layouts</span>
+        <h1>Build Better Web Sections with Flexbox</h1>
+        <p>A structured demonstration of split heroes, fluid card grids, and responsive rows using CSS Flexbox.</p>
+        <button class="hero-btn">Explore Layouts</button>
+      </div>
+      <div class="hero-visual">
+        <div>display: flex;</div>
+        <div>justify-content: space-between;</div>
+        <div>align-items: center;</div>
+        <div>flex-wrap: wrap;</div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+      <div class="section-title">
+        <h2>Features Section Pattern</h2>
+        <p>Equal height cards wrapping effortlessly across devices</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Dynamic Alignment</h3>
+          <p>Effortlessly center items horizontally and vertically without manual margins.</p>
+          <span class="tag">justify & align</span>
+        </div>
+        <div class="card">
+          <h3>Uniform Card Heights</h3>
+          <p>Children stretch by default to match the tallest sibling card in the row.</p>
+          <span class="tag">align-items: stretch</span>
+        </div>
+        <div class="card">
+          <h3>Fluid Wrap</h3>
+          <p>Cards automatically drop into the next line when screen size shrinks.</p>
+          <span class="tag">flex-wrap: wrap</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternating Showcase -->
+    <section id="showcase">
+      <div class="section-title">
+        <h2>Alternating Showcase Pattern</h2>
+        <p>Flipping layout direction with flex-direction: row-reverse</p>
+      </div>
+      <div class="alt-row">
+        <div class="alt-text">
+          <h3>Block 1: Standard Row</h3>
+          <p>Text on the left, media on the right. Both columns take flex: 1 1 50% for equal width sharing.</p>
+        </div>
+        <div class="alt-box">Interactive Graphic A</div>
+      </div>
+      <div class="alt-row reverse">
+        <div class="alt-text">
+          <h3>Block 2: Reversed Row</h3>
+          <p>Flipped horizontally using row-reverse, maintaining clean semantic order for screen readers.</p>
+        </div>
+        <div class="alt-box green">Interactive Graphic B</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div>
+        <h3>FlexLayouts</h3>
+        <p style="color: #64748b;">Day 10 Frontend - CSS Flexbox Section Layouts</p>
+      </div>
+      <div>
+        <p style="color: #64748b;">Built with clean, modern CSS Flexbox.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
